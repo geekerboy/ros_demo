@@ -1,0 +1,8 @@
+#goal
+uint32 disher_id
+---
+#result
+uint32 total_cleaned
+---
+#feedback
+float32 percent_complete
