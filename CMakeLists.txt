@@ -108,6 +108,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
   ${catkin_INCLUDE_DIRS}
+
 )
 
 ## Declare a C++ library
@@ -116,10 +117,18 @@ include_directories(
 # )
 #添加add_dependencies确保生成头文件，头文件，头文件，不同通信方式不一样的哦
 #包含的时候用"ros_demo/xx.h"的方式
+#添加自己写的动态链接库　link必须在add_executable之前
+#link_directories(
+#		${catkin_LIB_DIRS} /usr/lib
+#)
+#添加自己写的动态链接库
 add_executable(talker_node src/talker.cpp)
 add_executable(listener_node src/listener.cpp)
 add_executable(listener2_node src/listener2.cpp)
-target_link_libraries(talker_node ${catkin_LIBRARIES})
+target_link_libraries(talker_node ${catkin_LIBRARIES} MathFunc)
+#添加自己写的动态链接库   单独添加编译不通过，不通过，不通过
+#target_link_libraries(talker_node MathFunc})
+#添加自己写的动态链接库
 target_link_libraries(listener_node ${catkin_LIBRARIES})
 target_link_libraries(listener2_node ${catkin_LIBRARIES})
 add_dependencies(talker_node ros_demo_generate_messages_cpp)
