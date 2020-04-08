@@ -1,8 +1,0 @@
-prefix=/home/geeker/test_file/ros_test/src/ros_demo/cmake-build-debug/devel
-
-Name: ros_demo
-Description: Description of ros_demo
-Version: 0.0.0
-Cflags: -I/home/geeker/test_file/ros_test/src/ros_demo/cmake-build-debug/devel/include
-Libs: -L${prefix}/lib 
-Requires: roscpp rospy std_msgs message_runtime actionlib_msgs
