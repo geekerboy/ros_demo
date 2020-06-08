@@ -149,6 +149,9 @@ target_link_libraries(myaction_client ${catkin_LIBRARIES})
 add_dependencies(myaction_server ${${PROJECT_NAME}_EXPORTED_TARGETS})
 add_dependencies(myaction_client ${${PROJECT_NAME}_EXPORTED_TARGETS})
 
+add_executable(name_demo src/param.cpp)
+target_link_libraries(name_demo ${catkin_LIBRARIES})
+#add_dependencies(name_demo ${PROJECT_NAME}_gencfg)
 #add_executable(dynamic_param_executable src/dynamic_param_server.cpp header/param.h)
 #target_link_libraries(dynamic_param_executable ${catkin_LIBRARIES})
 
