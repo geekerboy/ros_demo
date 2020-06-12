@@ -3,31 +3,12 @@
 
 
 
-int mode_choose_value=1;//1=+,2=-,3=x;
-bool add_sum(ros_demo::add::Request  &req,
-         ros_demo::add::Response &res)
+bool add_sum(ros_demo::add::Request  &req,ros_demo::add::Response &res)
 {
-  switch(mode_choose_value) {
-      case 1:
-          res.sum=req.num1+req.num2;ROS_INFO("The mode_choose_value=%d",mode_choose_value);
-          break;
-      case 2:
-          res.sum=req.num1-req.num2;ROS_INFO("The mode_choose_value=%d",mode_choose_value);
-          break;
-
-      case 3:
-          res.sum=req.num1*req.num2;
-          break;
-
-      default:
-          res.sum=req.num1*req.num2;ROS_INFO("The mode_choose_value=%d",mode_choose_value);
-          break;
-
-  }
-
-  ROS_INFO("request: x=%ld, y=%ld", (long int)req.num1, (long int)req.num2);
-  ROS_INFO("sending back response: [%ld]", (long int)res.sum);
-  return true;
+		res.sum=req.num1+req.num2;
+		ROS_INFO("request: x=%ld, y=%ld,sending back response: [%ld]",
+						(long int)req.num1, (long int)req.num2, (long int)res.sum);
+    return true;
 }
 
 int main(int argc, char** argv)
@@ -38,15 +19,9 @@ int main(int argc, char** argv)
 
   ros::ServiceServer service = nh.advertiseService("add_two_ints", add_sum);
   ROS_INFO("Ready to add two ints.");
-    ros::Rate loop_rate(5);
-  int tmp=1;
-  while(ros::ok()){
-      ++tmp;
+  ros::Rate loop_rate(5);
 
-      if(nh.getParam("myparam", mode_choose_value))
-      {
-          //ROS_INFO("The mode_choose_value: [%d]", mode_choose_value);
-      }
+  while(ros::ok()){
       ros::spinOnce();
       loop_rate.sleep();
   }
