@@ -9,12 +9,15 @@ project(ros_demo)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
 	roscpp
-        rospy
-        std_msgs
-        message_generation
-        actionlib_msgs
-        actionlib
-        dynamic_reconfigure
+    rospy
+    std_msgs
+    message_generation
+    actionlib_msgs
+    actionlib
+	dynamic_reconfigure
+		serial
+
+
 )
 
 ## System dependencies are found with CMake's conventions
@@ -54,6 +57,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_message_files(
         FILES
         gps.msg
+		uwb.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -96,7 +100,7 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
         CATKIN_DEPENDS roscpp rospy std_msgs
-        message_runtime actionlib_msgs
+        message_runtime actionlib_msgs serial
 )
 
 
@@ -152,8 +156,12 @@ add_dependencies(myaction_client ${${PROJECT_NAME}_EXPORTED_TARGETS})
 add_executable(name_demo src/param.cpp)
 target_link_libraries(name_demo ${catkin_LIBRARIES})
 #add_dependencies(name_demo ${PROJECT_NAME}_gencfg)
-#add_executable(dynamic_param_executable src/dynamic_param_server.cpp header/param.h)
-#target_link_libraries(dynamic_param_executable ${catkin_LIBRARIES})
+
+
+add_executable(serial_port src/communication/serial_lib/serial_communication.cpp)
+add_dependencies(serial_port ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(serial_port ${catkin_LIBRARIES})
+
 
 #############
 ## Install ##
